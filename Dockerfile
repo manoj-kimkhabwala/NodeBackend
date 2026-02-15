@@ -1,15 +1,9 @@
-FROM node:18
-
-ENV HOME=/home/app
-
-COPY package.json $HOME/node_docker/
-
-WORKDIR $HOME/node_docker
-
-RUN npm install --silent --progress=false
-
-COPY . $HOME/node_docker
-
+FROM node:18-alpine
+WORKDIR /app
+ENV NODE_ENV=production
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
 EXPOSE 3000
-
-CMD ["npm", "start"]
+USER node
+CMD ["node", "server.js"]

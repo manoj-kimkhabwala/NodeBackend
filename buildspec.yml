@@ -6,7 +6,7 @@ phases:
       - docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASS
       - REPOSITORY_URI="docker.io/manojkimkhabwala/backend"
       - CONTAINER_NAME="backend"
-      - IMAGE_TAG="latest"
+      - IMAGE_TAG=$CODEBUILD_RESOLVED_SOURCE_VERSION
   build:
     commands:
       - echo Build started on `date`
